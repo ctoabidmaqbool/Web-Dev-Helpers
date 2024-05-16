@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <style>
+        body {
+            background-color: #330033;
+            position: relative;
+            min-height: 100%;
+            top: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ccc;
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="about" class="container">
+        <h1>About</h1>
+        <p>Translate this page to another language:</p>
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+            }
+        </script>
+        <br>
+        <p>Made by Marcus Alder 2015/2016.</p>
+    </div>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
