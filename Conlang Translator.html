@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         body {
             background-color: #330033;
@@ -30,55 +32,6 @@
     </style>
 
     <style>
-        p.hello {
-            font-size: 12px;
-            color: darkgray;
-        }
-
-        #google_language_translator,
-        #flags {
-            text-align: left;
-        }
-
-        #google_language_translator {
-            clear: both;
-        }
-
-        #flags {
-            width: 165px;
-        }
-
-        #flags a {
-            display: inline-block;
-            margin-right: 2px;
-        }
-
-        #google_language_translator {
-            width: auto !important;
-        }
-
-        div.skiptranslate.goog-te-gadget {
-            display: inline !important;
-        }
-
-        .goog-tooltip {
-            display: none !important;
-        }
-
-        .goog-tooltip:hover {
-            display: none !important;
-        }
-
-        .goog-text-highlight {
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        #google_language_translator select.goog-te-combo {
-            color: #ffffff;
-        }
-
         div.skiptranslate {
             display: none !important;
         }
@@ -87,46 +40,63 @@
             top: 0px !important;
         }
 
-        #goog-gt- {
-            display: none !important;
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            border-radius: 12px;
+            border: 2px solid white;
         }
 
-        font font {
-            background-color: transparent !important;
-            box-shadow: none !important;
-            position: initial !important;
+        .language-selector:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
         }
 
-        #glt-translate-trigger {
-            bottom: auto;
-            top: 0;
+        .language-selector i.fa {
+            font-size: 20px;
         }
 
-        .tool-container.tool-top {
-            top: 50px !important;
-            bottom: auto !important;
-        }
-
-        .tool-container.tool-top .arrow {
-            border-color: transparent transparent #d0cbcb;
-            top: -14px;
-        }
-
-        #glt-translate-trigger>span {
-            color: #ffffff;
-        }
-
-        #glt-translate-trigger {
-            background: #32ad01;
-        }
-
-        .goog-te-gadget .goog-te-combo {
-            width: 100%;
-        }
-
-        #google_language_translator .goog-te-gadget .goog-te-combo {
+        .flags-popup {
+            display: none;
+            position: absolute;
+            bottom: -41px;
+            left: -40px;
             background: #000000;
-            border: 0 !important;
+            padding: 10px 5px 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .language-selector:hover .flags-popup {
+            display: flex;
+        }
+
+        .flag {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .flag.united-states {
+            background: url(images/flags.png) -116px -351px no-repeat;
+        }
+
+        .flag.italian {
+            background: url(images/flags.png) -58px -177px no-repeat;
         }
     </style>
 </head>
@@ -135,20 +105,38 @@
     <div id="about" class="container">
         <h1>About</h1>
         <p>Translate this page to another language:</p>
+        <div class="language-selector">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <div class="flags-popup">
+                <div class="flag united-states" data-lang="en"></div>
+                <div class="flag italian" data-lang="it"></div>
+            </div>
+        </div>
         <div id="google_translate_element"></div>
-        <br>
         <p>Made by Marcus Alder 2015/2016.</p>
     </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                // layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false,
                 includedLanguages: 'en,it',
             }, 'google_translate_element');
         }
+
+        $(document).ready(function () {
+            $('.language-selector .flag').click(function () {
+                var language = $(this).data('lang');
+                var select = document.querySelector("select.goog-te-combo");
+                select.value = language;
+                select.dispatchEvent(new Event('change'));
+            });
+        });
     </script>
+    
     <script type="text/javascript"
         src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
